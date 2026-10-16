@@ -1,0 +1,460 @@
+/* ============================================================================
+   ESTILOS DEL PANEL ACADÉMICO
+   ----------------------------------------------------------------------------
+   Este archivo controla la APARIENCIA de index.html:
+   colores, tipografía, tarjetas, tabla y adaptación a móvil.
+   Está organizado en bloques para que sea fácil de leer y estudiar.
+
+   ÍNDICE
+   1. Variables de color y medidas (:root)
+   2. Estilos base (reseteo y tipografía)
+   3. Barra lateral de navegación
+   4. Contenido principal y cabecera
+   5. Tarjetas de estadísticas
+   6. Tabla de estudiantes
+   7. Tarjetas de calificaciones
+   8. Tarjeta de perfil
+   9. Pie de página
+   10. Diseño adaptable (media queries)
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. VARIABLES (:root)
+   Se declaran una sola vez y se reutilizan con var(--nombre).
+   Así, si quieres cambiar el color principal, lo cambias en un solo lugar.
+   ============================================================================ */
+:root {
+    /* Colores principales */
+    --color-fondo: #f3f5fb;          /* fondo general de la página */
+    --color-superficie: #ffffff;     /* fondo de tarjetas y sidebar */
+    --color-primario: #3b5bdb;       /* azul institucional (marca y acentos) */
+    --color-primario-suave: #e7ecfd; /* azul muy claro para fondos activos */
+    --color-texto: #1f2533;          /* texto principal */
+    --color-texto-suave: #6b7280;    /* texto secundario / gris */
+    --color-borde: #e5e7eb;          /* líneas y separadores */
+
+    /* Colores de estado académico */
+    --color-exito: #12805c;          /* verde: aprobado */
+    --color-exito-suave: #e3f6ef;
+    --color-error: #c0392b;          /* rojo: reprobado */
+    --color-error-suave: #fdecea;
+
+    /* Formas y sombras */
+    --radio: 14px;                                    /* bordes redondeados */
+    --sombra: 0 4px 16px rgba(31, 37, 51, 0.06);      /* sombra suave */
+    --ancho-sidebar: 250px;                           /* ancho de la barra lateral */
+
+    /* Tipografía: fuentes del sistema, legibles y sin dependencias */
+    --fuente: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+
+/* ============================================================================
+   2. ESTILOS BASE
+   ============================================================================ */
+
+/* El selector * aplica el reseteo a TODOS los elementos.
+   box-sizing: border-box hace que el padding no aumente el tamaño total. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* desplazamiento suave al hacer clic en el menú */
+}
+
+body {
+    font-family: var(--fuente);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.5;
+}
+
+/* Utilidad reutilizable para texto secundario */
+.texto-suave {
+    color: var(--color-texto-suave);
+    font-size: 0.85rem;
+}
+
+
+/* ============================================================================
+   3. BARRA LATERAL
+   position: fixed la deja pegada a la izquierda mientras se hace scroll.
+   ============================================================================ */
+.barra-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--ancho-sidebar);
+    height: 100vh;
+    background-color: var(--color-superficie);
+    border-right: 1px solid var(--color-borde);
+    padding: 22px 16px;
+    display: flex;
+    flex-direction: column; /* marca arriba, menú al centro, pie abajo */
+    gap: 22px;
+}
+
+/* Logotipo */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 8px;
+    font-size: 1.15rem;
+}
+.marca-icono {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background-color: var(--color-primario);
+    color: #fff;
+}
+.marca-texto strong { color: var(--color-primario); }
+
+/* Menú de navegación */
+.navegacion {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1; /* ocupa el espacio disponible para empujar el pie hacia abajo */
+}
+.nav-enlace {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--color-texto-suave);
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s; /* animación suave */
+}
+.nav-enlace:hover {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+/* Enlace de la sección activa */
+.nav-enlace.activo {
+    background-color: var(--color-primario-suave);
+    color: var(--color-primario);
+    font-weight: 600;
+}
+
+/* Pie de la barra lateral (usuario) */
+.barra-lateral-pie {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: var(--radio);
+    background-color: var(--color-fondo);
+}
+.pie-datos { display: flex; flex-direction: column; line-height: 1.2; }
+.pie-nombre { font-weight: 600; font-size: 0.9rem; }
+.pie-rol { font-size: 0.78rem; color: var(--color-texto-suave); }
+
+
+/* ============================================================================
+   4. CONTENIDO PRINCIPAL
+   margin-left deja espacio para la barra lateral fija.
+   ============================================================================ */
+.contenido {
+    margin-left: var(--ancho-sidebar);
+    padding: 28px 32px;
+}
+
+.cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.cabecera h1 { font-size: 1.6rem; }
+.cabecera-sub { color: var(--color-texto-suave); font-size: 0.9rem; }
+
+/* Pequeña píldora con el período */
+.periodo {
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+}
+
+/* Espacio entre secciones */
+.seccion { margin-bottom: 34px; }
+
+.seccion-cabecera { margin-bottom: 16px; }
+.seccion-cabecera h2 { font-size: 1.15rem; }
+.seccion-sub { color: var(--color-texto-suave); font-size: 0.85rem; }
+
+
+/* ============================================================================
+   5. TARJETAS DE ESTADÍSTICAS
+   grid + auto-fit crea tantas columnas como quepan en el ancho disponible.
+   ============================================================================ */
+.tarjetas-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.tarjeta-estadistica {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 18px;
+    box-shadow: var(--sombra);
+}
+.estadistica-icono {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+.estadistica-etiqueta { font-size: 0.82rem; color: var(--color-texto-suave); }
+.estadistica-valor { font-size: 1.5rem; font-weight: 700; }
+
+/* Variantes de color para los iconos de cada tarjeta */
+.icono-azul    { background-color: #e7ecfd; color: #3b5bdb; }
+.icono-violeta { background-color: #f0e9fd; color: #7048e8; }
+.icono-verde   { background-color: var(--color-exito-suave); color: var(--color-exito); }
+.icono-rojo    { background-color: var(--color-error-suave); color: var(--color-error); }
+
+
+/* ============================================================================
+   6. TABLA DE ESTUDIANTES
+   ============================================================================ */
+.tabla-contenedor {
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    overflow-x: auto; /* permite desplazamiento horizontal si hace falta */
+}
+.tabla {
+    width: 100%;
+    border-collapse: collapse; /* une los bordes de las celdas */
+}
+.tabla th,
+.tabla td {
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+}
+.tabla thead th {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-texto-suave);
+    border-bottom: 1px solid var(--color-borde);
+    background-color: #fafbff;
+}
+.tabla tbody tr { border-bottom: 1px solid var(--color-borde); }
+.tabla tbody tr:last-child { border-bottom: none; }
+.tabla tbody tr:hover { background-color: #f8faff; } /* resaltado al pasar el mouse */
+
+
+/* ============================================================================
+   7. TARJETAS DE CALIFICACIONES
+   ============================================================================ */
+.rejilla-calificaciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+.tarjeta-estudiante {
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 18px;
+    box-shadow: var(--sombra);
+}
+.tarjeta-estudiante-cab {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+.tarjeta-estudiante-cab h3 { font-size: 0.95rem; }
+/* empuja la etiqueta de estado hacia la derecha */
+.tarjeta-estudiante-cab .etiqueta { margin-left: auto; }
+
+/* Lista de las tres notas */
+.notas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-borde);
+    border-bottom: 1px solid var(--color-borde);
+}
+.nota { display: flex; justify-content: space-between; font-size: 0.88rem; }
+.nota-nombre { color: var(--color-texto-suave); }
+.nota-valor { font-weight: 600; }
+
+/* Barra de progreso: representa el promedio respecto a la escala 1,0–5,0 */
+.barra-progreso {
+    height: 8px;
+    border-radius: 999px;
+    background-color: var(--color-fondo);
+    margin-top: 14px;
+    overflow: hidden;
+}
+.barra-relleno {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+}
+.relleno-aprobado  { background-color: var(--color-exito); }
+.relleno-reprobado { background-color: var(--color-error); }
+
+
+/* ============================================================================
+   8. ETIQUETAS DE ESTADO Y AVATARES (se usan en varias secciones)
+   ============================================================================ */
+.etiqueta {
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+.estado-aprobado  { background-color: var(--color-exito-suave); color: var(--color-exito); }
+.estado-reprobado { background-color: var(--color-error-suave); color: var(--color-error); }
+
+/* Avatares con iniciales */
+.avatar {
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background-color: var(--color-primario-suave);
+    color: var(--color-primario);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.avatar-xs { width: 30px; height: 30px; font-size: 0.7rem; }
+.avatar-sm { width: 38px; height: 38px; font-size: 0.8rem; }
+.avatar-md { width: 44px; height: 44px; font-size: 0.9rem; }
+.avatar-lg { width: 76px; height: 76px; font-size: 1.5rem; }
+
+
+/* ============================================================================
+   9. TARJETA DE PERFIL
+   ============================================================================ */
+.tarjeta-perfil {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    padding: 24px;
+    box-shadow: var(--sombra);
+}
+.perfil-datos h3 { font-size: 1.1rem; margin-bottom: 2px; }
+.perfil-lista {
+    list-style: none; /* quita los puntos de la lista */
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+.perfil-lista li { display: flex; gap: 8px; }
+.perfil-lista li span { min-width: 130px; }
+
+
+/* ============================================================================
+   PIE DE PÁGINA
+   ============================================================================ */
+.pie-pagina {
+    border-top: 1px solid var(--color-borde);
+    padding-top: 18px;
+    text-align: center;
+    color: var(--color-texto-suave);
+    font-size: 0.8rem;
+}
+
+
+/* ============================================================================
+   10. DISEÑO ADAPTABLE (MEDIA QUERIES)
+   Las reglas de aquí solo se aplican cuando la pantalla es más angosta.
+   ============================================================================ */
+
+/* Tablets y pantallas medianas: menos padding */
+@media (max-width: 992px) {
+    .contenido { padding: 22px; }
+}
+
+/* Móviles: la barra lateral se convierte en barra superior horizontal */
+@media (max-width: 768px) {
+    .barra-lateral {
+        position: static;      /* deja de estar fija */
+        width: 100%;
+        height: auto;
+        flex-direction: row;   /* marca y menú en fila */
+        align-items: center;
+        flex-wrap: wrap;
+        border-right: none;
+        border-bottom: 1px solid var(--color-borde);
+        gap: 12px;
+    }
+    .navegacion {
+        flex-direction: row;   /* el menú se vuelve horizontal */
+        flex-wrap: wrap;
+        width: 100%;
+        overflow-x: auto;
+    }
+    .nav-enlace span { display: inline; }
+    .barra-lateral-pie { display: none; } /* se oculta para ahorrar espacio */
+
+    .contenido {
+        margin-left: 0;
+        padding: 18px;
+    }
+
+    /* La tabla pasa de filas a "tarjetas" apiladas */
+    .tabla thead { display: none; }       /* ocultamos los encabezados */
+    .tabla, .tabla tbody, .tabla tr, .tabla td { display: block; width: 100%; }
+    .tabla tbody tr {
+        margin-bottom: 12px;
+        border: 1px solid var(--color-borde);
+        border-radius: var(--radio);
+        overflow: hidden;
+    }
+    .tabla td {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+    }
+    /* ::before inserta el encabezado de cada celda usando data-label */
+    .tabla td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--color-texto-suave);
+    }
+
+    /* La tarjeta de perfil se apila en vertical */
+    .tarjeta-perfil { flex-direction: column; align-items: center; text-align: center; }
+    .perfil-lista li { flex-direction: column; gap: 0; }
+}
+
+/* Móviles pequeños: títulos más compactos */
+@media (max-width: 480px) {
+    .cabecera h1 { font-size: 1.3rem; }
+    .estadistica-valor { font-size: 1.3rem; }
+}

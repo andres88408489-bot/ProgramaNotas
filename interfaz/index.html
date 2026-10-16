@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  PANEL ACADÉMICO - Interfaz visual (solo HTML + CSS)
+  ----------------------------------------------------------------------------
+  Este archivo contiene ÚNICAMENTE la ESTRUCTURA de la página.
+  Los colores, tamaños y la distribución viven en "estilos.css".
+  No hay JavaScript, ni base de datos, ni conexión con el programa Java:
+  todos los datos de abajo son estáticos (de ejemplo).
+  ============================================================================
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <!-- Esta etiqueta hace que el diseño se adapte a celulares y tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Académico | Estudiantes y Calificaciones</title>
+
+    <!-- Enlace a la hoja de estilos externa (mismo nivel de carpeta) -->
+    <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+
+    <!-- ====================================================================
+         BARRA LATERAL DE NAVEGACIÓN
+         En escritorio queda fija a la izquierda; en móvil se vuelve una
+         barra superior (ese cambio lo hace el CSS con @media).
+         ==================================================================== -->
+    <aside class="barra-lateral">
+
+        <!-- Logotipo / nombre de la plataforma -->
+        <div class="marca">
+            <span class="marca-icono" aria-hidden="true">
+                <!-- Icono: birrete de graduación (SVG dibujado con líneas) -->
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10 12 5 2 10l10 5 10-5Z" />
+                    <path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5" />
+                </svg>
+            </span>
+            <span class="marca-texto">Aula<strong>Plus</strong></span>
+        </div>
+
+        <!-- Menú con las cuatro secciones. Cada enlace apunta a una sección
+             de la página mediante su id (#inicio, #estudiantes, etc.). -->
+        <nav class="navegacion" aria-label="Navegación principal">
+            <a class="nav-enlace activo" href="#inicio">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+                    <path d="M9 22V12h6v10" />
+                </svg>
+                <span>Inicio</span>
+            </a>
+
+            <a class="nav-enlace" href="#estudiantes">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span>Estudiantes</span>
+            </a>
+
+            <a class="nav-enlace" href="#calificaciones">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 3v18h18" />
+                    <rect x="7" y="12" width="3" height="6" rx="1" />
+                    <rect x="12" y="8" width="3" height="10" rx="1" />
+                    <rect x="17" y="5" width="3" height="13" rx="1" />
+                </svg>
+                <span>Calificaciones</span>
+            </a>
+
+            <a class="nav-enlace" href="#perfil">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span>Perfil</span>
+            </a>
+        </nav>
+
+        <!-- Pie de la barra lateral: usuario con sesión activa (de ejemplo) -->
+        <div class="barra-lateral-pie">
+            <span class="avatar avatar-sm">PR</span>
+            <div class="pie-datos">
+                <span class="pie-nombre">Prof. Rivera</span>
+                <span class="pie-rol">Docente</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ====================================================================
+         CONTENIDO PRINCIPAL
+         ==================================================================== -->
+    <main class="contenido">
+
+        <!-- Cabecera: título de la página y fecha de ejemplo -->
+        <header class="cabecera">
+            <div>
+                <h1>Panel Académico</h1>
+                <p class="cabecera-sub">Resumen general del curso y calificaciones</p>
+            </div>
+            <span class="periodo">Período 2026</span>
+        </header>
+
+        <!-- ================================================================
+             SECCIÓN 1: INICIO
+             Cuatro tarjetas con estadísticas generales (datos de ejemplo).
+             ================================================================ -->
+        <section id="inicio" class="seccion">
+            <div class="tarjetas-estadisticas">
+
+                <!-- Tarjeta: total de estudiantes -->
+                <article class="tarjeta-estadistica">
+                    <span class="estadistica-icono icono-azul" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="estadistica-etiqueta">Total de estudiantes</p>
+                        <p class="estadistica-valor">4</p>
+                    </div>
+                </article>
+
+                <!-- Tarjeta: promedio general del curso -->
+                <article class="tarjeta-estadistica">
+                    <span class="estadistica-icono icono-violeta" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="m3 17 6-6 4 4 8-8" />
+                            <path d="M17 7h4v4" />
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="estadistica-etiqueta">Promedio general</p>
+                        <p class="estadistica-valor">3,8</p>
+                    </div>
+                </article>
+
+                <!-- Tarjeta: estudiantes aprobados -->
+                <article class="tarjeta-estadistica">
+                    <span class="estadistica-icono icono-verde" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="m8.5 12 2.5 2.5L16 9" />
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="estadistica-etiqueta">Aprobados</p>
+                        <p class="estadistica-valor">3</p>
+                    </div>
+                </article>
+
+                <!-- Tarjeta: estudiantes reprobados -->
+                <article class="tarjeta-estadistica">
+                    <span class="estadistica-icono icono-rojo" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="m15 9-6 6M9 9l6 6" />
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="estadistica-etiqueta">Por mejorar</p>
+                        <p class="estadistica-valor">1</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             SECCIÓN 2: ESTUDIANTES
+             Tabla con los cuatro estudiantes y sus tres notas.
+             ================================================================ -->
+        <section id="estudiantes" class="seccion">
+            <div class="seccion-cabecera">
+                <h2>Estudiantes</h2>
+                <p class="seccion-sub">Escala de 1,0 a 5,0 · Aprueba con promedio 3,0</p>
+            </div>
+
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Nota 1</th>
+                            <th>Nota 2</th>
+                            <th>Nota 3</th>
+                            <th>Promedio</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Cada <tr> es una fila; los data-label se usan en
+                             móvil para mostrar los encabezados dentro de la tarjeta -->
+                        <tr>
+                            <td data-label="Estudiante"><span class="avatar avatar-xs">CS</span> Carlos Sánchez</td>
+                            <td data-label="Nota 1">4,5</td>
+                            <td data-label="Nota 2">4,8</td>
+                            <td data-label="Nota 3">4,2</td>
+                            <td data-label="Promedio"><strong>4,5</strong></td>
+                            <td data-label="Estado"><span class="etiqueta estado-aprobado">Aprobado</span></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Estudiante"><span class="avatar avatar-xs">SS</span> Sara Suárez</td>
+                            <td data-label="Nota 1">4,9</td>
+                            <td data-label="Nota 2">5,0</td>
+                            <td data-label="Nota 3">4,7</td>
+                            <td data-label="Promedio"><strong>4,9</strong></td>
+                            <td data-label="Estado"><span class="etiqueta estado-aprobado">Aprobado</span></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Estudiante"><span class="avatar avatar-xs">PT</span> Pablo Toro</td>
+                            <td data-label="Nota 1">2,5</td>
+                            <td data-label="Nota 2">3,1</td>
+                            <td data-label="Nota 3">2,8</td>
+                            <td data-label="Promedio"><strong>2,8</strong></td>
+                            <td data-label="Estado"><span class="etiqueta estado-reprobado">Reprobado</span></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Estudiante"><span class="avatar avatar-xs">JG</span> Juan Gómez</td>
+                            <td data-label="Nota 1">3,5</td>
+                            <td data-label="Nota 2">2,9</td>
+                            <td data-label="Nota 3">3,2</td>
+                            <td data-label="Promedio"><strong>3,2</strong></td>
+                            <td data-label="Estado"><span class="etiqueta estado-aprobado">Aprobado</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             SECCIÓN 3: CALIFICACIONES
+             Una tarjeta por estudiante con sus 3 notas, el promedio y el
+             estado académico. El ancho de la barra (style="width:...") es
+             un valor de ejemplo calculado como promedio / 5.
+             ================================================================ -->
+        <section id="calificaciones" class="seccion">
+            <div class="seccion-cabecera">
+                <h2>Calificaciones</h2>
+                <p class="seccion-sub">Detalle de notas por estudiante</p>
+            </div>
+
+            <div class="rejilla-calificaciones">
+
+                <!-- Estudiante: Carlos Sánchez -->
+                <article class="tarjeta-estudiante">
+                    <header class="tarjeta-estudiante-cab">
+                        <span class="avatar avatar-md">CS</span>
+                        <div>
+                            <h3>Carlos Sánchez</h3>
+                            <span class="texto-suave">Promedio 4,5</span>
+                        </div>
+                        <span class="etiqueta estado-aprobado">Aprobado</span>
+                    </header>
+                    <div class="notas-lista">
+                        <div class="nota"><span class="nota-nombre">Nota 1</span><span class="nota-valor">4,5</span></div>
+                        <div class="nota"><span class="nota-nombre">Nota 2</span><span class="nota-valor">4,8</span></div>
+                        <div class="nota"><span class="nota-nombre">Nota 3</span><span class="nota-valor">4,2</span></div>
+                    </div>
+                    <div class="barra-progreso">
+                        <span class="barra-relleno relleno-aprobado" style="width: 90%"></span>
+                    </div>
+                </article>
+
+                <!-- Estudiante: Sara Suárez -->
+                <article class="tarjeta-estudiante">
+                    <header class="tarjeta-estudiante-cab">
+                        <span class="avatar avatar-md">SS</span>
+                        <div>
+                            <h3>Sara Suárez</h3>
+                            <span class="texto-suave">Promedio 4,9</span>
+                        </div>
+                        <span class="etiqueta estado-aprobado">Aprobado</span>
+                    </header>
+                    <div class="notas-lista">
+                        <div class="nota"><span class="nota-nombre">Nota 1</span><span class="nota-valor">4,9</span></div>
+                        <div class="nota"><span class="nota-nombre">Nota 2</span><span class="nota-valor">5,0</span></div>
+                        <div class="nota"><span class="nota-nombre">Nota 3</span><span class="nota-valor">4,7</span></div>
+                    </div>
+                    <div class="barra-progreso">
+                        <span class="barra-relleno relleno-aprobado" style="width: 97%"></span>
+                    </div>
+                </article>
+
+                <!-- Estudiante: Pablo Toro (reprobado) -->
+                <article class="tarjeta-estudiante">
+                    <header class="tarjeta-estudiante-cab">
+                        <span class="avatar avatar-md">PT</span>
+                        <div>
+                            <h3>Pablo Toro</h3>
+                            <span class="texto-suave">Promedio 2,8</span>
+                        </div>
+                        <span class="etiqueta estado-reprobado">Reprobado</span>
+                    </header>
+                    <div class="notas-lista">
+                        <div class="nota"><span class="nota-nombre">Nota 1</span><span class="nota-valor">2,5</span></div>
+                        <div class="nota"><span class="nota-nombre">Nota 2</span><span class="nota-valor">3,1</span></div>
+                        <div class="nota"><span class="nota-nombre">Nota 3</span><span class="nota-valor">2,8</span></div>
+                    </div>
+                    <div class="barra-progreso">
+                        <span class="barra-relleno relleno-reprobado" style="width: 56%"></span>
+                    </div>
+                </article>
+
+                <!-- Estudiante: Juan Gómez -->
+                <article class="tarjeta-estudiante">
+                    <header class="tarjeta-estudiante-cab">
+                        <span class="avatar avatar-md">JG</span>
+                        <div>
+                            <h3>Juan Gómez</h3>
+                            <span class="texto-suave">Promedio 3,2</span>
+                        </div>
+                        <span class="etiqueta estado-aprobado">Aprobado</span>
+                    </header>
+                    <div class="notas-lista">
+                        <div class="nota"><span class="nota-nombre">Nota 1</span><span class="nota-valor">3,5</span></div>
+                        <div class="nota"><span class="nota-nombre">Nota 2</span><span class="nota-valor">2,9</span></div>
+                        <div class="nota"><span class="nota-nombre">Nota 3</span><span class="nota-valor">3,2</span></div>
+                    </div>
+                    <div class="barra-progreso">
+                        <span class="barra-relleno relleno-aprobado" style="width: 64%"></span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             SECCIÓN 4: PERFIL
+             Datos de ejemplo del usuario que usa el sistema.
+             ================================================================ -->
+        <section id="perfil" class="seccion">
+            <div class="seccion-cabecera">
+                <h2>Perfil</h2>
+                <p class="seccion-sub">Información del usuario</p>
+            </div>
+
+            <article class="tarjeta-perfil">
+                <span class="avatar avatar-lg">PR</span>
+                <div class="perfil-datos">
+                    <h3>Prof. Patricio Rivera</h3>
+                    <p class="texto-suave">Docente · Área de Programación</p>
+                    <ul class="perfil-lista">
+                        <li><span class="texto-suave">Correo</span> <strong>profesor@aulaplus.edu</strong></li>
+                        <li><span class="texto-suave">Curso a cargo</span> <strong>Programación I</strong></li>
+                        <li><span class="texto-suave">Estudiantes</span> <strong>4</strong></li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <!-- Pie de página del panel -->
+        <footer class="pie-pagina">
+            <p>AulaPlus · Datos de ejemplo con fines académicos · Sin conexión a base de datos</p>
+        </footer>
+    </main>
+
+</body>
+</html>
